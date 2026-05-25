@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Design</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            overflow: hidden;
+        }
+
+        /* CARD */
+        .card {
+            width: 310px;
+            height: 310px;
+            border: 2px solid #eee;
+            position: relative;
+            background: #db0d2c;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        /* TOP TEXT */
+        .top-text {
+            position: absolute;
+            top: 25px;
+            width: 100%;
+            text-align: center;
+            color: rgb(245, 236, 236);
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        /* HEART */
+        .big-heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            top: 120px;
+            left: 105px;
+            transform: rotate(-45deg);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .big-heart::before,
+        .big-heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .big-heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .big-heart::after {
+            top: 0;
+            left: 50px;
+        }
+
+        /* NAME */
+        .name {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+
+            color: red;
+            font-size: 26px;
+            font-weight: 900;
+            font-family: "Padauk", sans-serif;
+
+            white-space: nowrap;
+            z-index: 50;
+            text-shadow: 1px 1px 0 white;
+        }
+
+        /* FLYING HEARTS */
+        .flying-heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
+        @keyframes fly1 {
+            from {
+                transform: translate(-200px, -200px);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(120vw, 120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fly2 {
+            from {
+                transform: translate(120vw, -200px);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(-120vw, 120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fly3 {
+            from {
+                transform: translate(-200px, 120vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(120vw, -120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fly4 {
+            from {
+                transform: translate(120vw, 120vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(-120vw, -120vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="top-text">
+            <h5>YOU ARE ALWAYS IN MY HEART</h5>
+        </div>
+
+        <div class="big-heart">
+            <div class="name">
+                <h2>💖 Myat 💖</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        const hearts = ["❤️", "💖", "💕", "💘", "💝", "💞", "🩷"];
+        const animations = ["fly1", "fly2", "fly3", "fly4"];
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("flying-heart");
+
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.fontSize = (14 + Math.random() * 25) + "px";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
+
+            heart.style.animation =
+                animations[Math.floor(Math.random() * animations.length)] +
+                " " + (5 + Math.random() * 4) + "s linear";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 9000);
+        }
+
+        /* ONLY 10 HEARTS */
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+
+    </script>
+
+</body>
+
+</html>
